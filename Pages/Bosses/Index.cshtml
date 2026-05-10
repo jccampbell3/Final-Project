@@ -1,0 +1,46 @@
+@page
+@model Final_Project.Pages.Bosses.IndexModel
+@{
+    ViewData["Title"] = "Bosses";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Bosses</h2>
+        <a asp-page="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Add Boss
+        </a>
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Strength</th>
+                <th>Defense</th>
+                <th>Speed</th>
+                <th>Loot</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            @foreach (var boss in Model.Boss) {
+                <tr>
+                    <td>@boss.Name</td>
+                    <td>@boss.Description</td>
+                    <td>@boss.StrengthLevel</td>
+                    <td>@boss.DefenseLevel</td>
+                    <td>@boss.SpeedLevel</td>
+                    <td>@boss.LootItems</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@boss.BossId" class="btn btn-sm btn-outline-secondary">Edit</a>
+                        <a asp-page="Details" asp-route-id="@boss.BossId" class="btn btn-sm btn-outline-info">Details</a>
+                        <a asp-page="Delete" asp-route-id="@boss.BossId" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

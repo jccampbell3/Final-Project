@@ -1,0 +1,84 @@
+﻿@page
+@model Final_Project.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<head>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+
+<div id="arenaCarousel" class="carousel slide">
+    <div class="carousel-indicators">
+        
+        <button type="button" data-bs-target="#arenaCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#arenaCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#arenaCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    
+    </div>
+    <div class="carousel-inner bg-dark" style="min-height: 300px;">
+        <div class="carousel-item active">
+            <div class="d-flex justify-content-center align-items-center text-white" style="min-height: 300px;">
+                <div class="text-center" style="text-shadow: 2px 2px 2px black">
+                    <h3>Enter the Arena</h3>
+                    <p class="fs-4">Where legends are forged and bosses are slain.</p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center align-items-center text-white" style="min-height: 300px;">
+                <div class="text-center" style="text-shadow: 2px 2px 2px black">
+                    <h3>Climb the Rankings</h3>
+                    <p class="fs-4">Prove your worth. Dominate the leaderboard.</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center align-items-center text-white" style="min-height: 300px;">
+                <div class="text-center" style="text-shadow: 2px 2px 2px black">
+
+                    <h3>Defeat the Bosses</h3>
+                    <p class="fs-4">Ten legendary bosses await. Do you have what it takes?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#arenaCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#arenaCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<hr class="my-4" />
+<div class="container">
+    <h3>The Leaderboard.</h3>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @for (int i = 0; i < Model.TopScores.Count; i++) {
+                var score = Model.TopScores[i];
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-dark">@score.Player.Username</span>
+                            <span class="bg-warning text-dark">#@(i + 1)</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-1"><strong>Boss:</strong> @score.Boss.Name</p>
+                            <p class="mb-1"><strong>Kill Count:</strong> @score.KillCount</p>
+                            <p class="mb-0"><strong>Title:</strong> @score.Player.Title</p>
+                        </div>
+                        <div class="card-footer text-muted small">
+                            <i class="bi"></i> @score.Player.Achievements
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+</div>

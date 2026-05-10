@@ -1,0 +1,60 @@
+@page
+@model Final_Project.Pages.Players.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Player</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Player.PlayerId" />
+            <div class="form-group">
+                <label asp-for="Player.Username" class="control-label"></label>
+                <input asp-for="Player.Username" class="form-control" />
+                <span asp-validation-for="Player.Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Title" class="control-label"></label>
+                <input asp-for="Player.Title" class="form-control" />
+                <span asp-validation-for="Player.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.StrengthLevel" class="control-label"></label>
+                <input asp-for="Player.StrengthLevel" class="form-control" />
+                <span asp-validation-for="Player.StrengthLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.AgilityLevel" class="control-label"></label>
+                <input asp-for="Player.AgilityLevel" class="form-control" />
+                <span asp-validation-for="Player.AgilityLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.IntelligenceLevel" class="control-label"></label>
+                <input asp-for="Player.IntelligenceLevel" class="form-control" />
+                <span asp-validation-for="Player.IntelligenceLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Player.Achievements" class="control-label"></label>
+                <input asp-for="Player.Achievements" class="form-control" />
+                <span asp-validation-for="Player.Achievements" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

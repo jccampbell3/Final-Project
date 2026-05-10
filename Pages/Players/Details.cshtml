@@ -1,0 +1,75 @@
+@page "{id:int}"
+@model Final_Project.Pages.Players.DetailsModel
+@{
+    ViewData["Title"] = "Player Details";
+}
+
+<div class="container mt-4">
+    <h2>@Model.Player.Username <small class="text-muted fs-5">— @Model.Player.Title</small></h2>
+    <hr />
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <tr><th>Strength</th><td>@Model.Player.StrengthLevel</td></tr>
+                <tr><th>Agility</th><td>@Model.Player.AgilityLevel</td></tr>
+                <tr><th>Intelligence</th><td>@Model.Player.IntelligenceLevel</td></tr>
+                <tr><th>Achievements</th><td>@Model.Player.Achievements</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <h4>Boss Kill History</h4>
+
+    @if (Model.HighScores.Count == 0) {
+        <div class="alert alert-info">This player has no recorded kills yet.</div>
+    }
+
+
+    else {
+
+
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Boss</th>
+                    <th>Kill Count</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var score in Model.HighScores) {
+                    <tr>
+                        <td>@score.Boss.Name</td>
+                        <td>@score.KillCount</td>
+                        <td>
+                            <a asp-page="/HighScores/Edit" asp-route-id="@score.HighScoreId"
+                               class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <form method="post" asp-page-handler="Delete"
+                                  asp-route-id="@Model.Player.PlayerId"
+                                  asp-route-scoreId="@score.HighScoreId"
+                                  style="display:inline;">
+                                <button type="submit" class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Delete this score?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+
+                
+            </tbody>
+        </table>
+    }
+
+
+
+    <div class="mt-4">
+        <a asp-page="Index" class="btn btn-secondary">Back to Players</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
